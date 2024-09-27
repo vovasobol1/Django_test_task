@@ -33,16 +33,27 @@ def generate_video(request):
             font_thickness = 2
             font_color = (255, 255, 255)  # Белый цвет текста
 
+            total_frames = 3 * 24
+            # Получаем размер текста
+            text_size = cv2.getTextSize(message, font, font_scale, font_thickness)[0]
+            text_width = text_size[0]
+            speed = (text_width + width) / total_frames
+
             # Создаем видео с бегущей строкой
-            for _ in range(3*80):
+            for _ in range(3*24):
                 # Очистка кадра
                 frame.fill(0)
 
                 # Новые координаты для бегущей строки
-                x -= 10  # Скорость бегущей строки
+                x -= speed  # Скорость бегущей строки
+
+                # Если текст выходит за пределы экрана, начинаем с правого края
+                if x < -text_width:
+                    x = width
 
                 # Добавляем текст
-                cv2.putText(frame, message, (x, height // 2), font, font_scale, font_color, font_thickness)
+                cv2.putText(frame, message, (int(x), height // 2 + text_size[1] // 2), font, font_scale, font_color,
+                            font_thickness)
 
                 # Записываем кадр
                 out.write(frame)

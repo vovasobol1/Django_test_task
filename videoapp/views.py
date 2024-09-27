@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import cv2
 import numpy as np
 import os
@@ -34,7 +34,7 @@ def generate_video(request):
             font_color = (255, 255, 255)  # Белый цвет текста
 
             # Создаем видео с бегущей строкой
-            for _ in range(72):  # 3 секунды с частотой 24 кадра/сек
+            for _ in range(3*80):
                 # Очистка кадра
                 frame.fill(0)
 
@@ -68,4 +68,13 @@ def generate_video(request):
 
 def get_all_requests(request):
     if request.method == 'GET':
-        return HttpResponse(VideoRequest.objects.all())
+        requests = VideoRequest.objects.all()
+        response_data = []
+        for video_request in requests:
+            response_data.append({
+                'message': video_request.message,
+                'created_at': video_request.created_at.isoformat()
+            })
+
+        return JsonResponse(response_data, safe=False)
+

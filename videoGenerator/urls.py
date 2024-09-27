@@ -21,5 +21,5 @@ from videoapp.views import generate_video
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('generate-video/', generate_video, name='generate_video')
+    path('generateVideo/', generate_video, name='generate_video')
 ]

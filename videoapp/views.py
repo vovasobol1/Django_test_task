@@ -4,11 +4,18 @@ import cv2
 import numpy as np
 import os
 
+from videoapp.models import VideoRequest
+
+
 def generate_video(request):
     if request.method == 'POST':
         message = request.POST.get('message')
 
         if message:
+            # Сохраняем запрос в базе данных
+            video_request = VideoRequest(message=message)
+            video_request.save()
+
             width, height = 100, 100
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             video_filename = message + '_ouput.mp4'
@@ -52,7 +59,13 @@ def generate_video(request):
             # Удаляем файл после отправки
             os.remove(video_filename)
 
+
             return response
 
 
     return render(request, 'videoapp/generate_video.html')
+
+
+def get_all_requests(request):
+    if request.method == 'GET':
+        return HttpResponse(VideoRequest.objects.all())

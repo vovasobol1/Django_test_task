@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from videoapp.views import generate_video
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('generate-video/', generate_video, name='generate_video')
 ]

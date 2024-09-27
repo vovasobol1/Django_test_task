@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Video</title>
+</head>
+<body>
+    <h1>Сгенерировать видео</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="message">Введите сообщение:</label>
+        <input type="text" id="message" name="message" required>
+        <button type="submit">Сгенерировать видео</button>
+    </form>
+</body>
+</html>

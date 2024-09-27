@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import cv2
-import numpy as np
 import os
 
 def generate_video(request):
@@ -9,7 +7,8 @@ def generate_video(request):
         message = request.POST.get('message')
 
         if message:
+            return HttpResponse("Сообщение введено")
 
 
-        else:
-            return HttpResponse("Пожалуйста, введите сообщение.")
+
+    return render(request, 'videoapp/generate_video.html')

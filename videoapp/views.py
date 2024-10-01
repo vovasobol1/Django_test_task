@@ -6,6 +6,9 @@ import os
 
 from videoapp.models import VideoRequest
 
+def homePage(request):
+    return render(request, 'videoapp/home.html')
+
 
 def generate_video(request):
     if request.method == 'POST':

@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from videoapp.views import generate_video, get_all_requests
+from videoapp.views import generate_video, get_all_requests, homePage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', homePage , name='generate_video'),
     path('generateVideo/', generate_video, name='generate_video'),
     path('get_all_requests/',get_all_requests , name='get_all_requests'),
 ]

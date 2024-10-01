@@ -31,10 +31,19 @@
             background-color: #45a049;
         }
     </style>
+    <script>
+        function redirectToGenerateVideo() {
+            window.location.href = "{% url 'generate_video' %}";
+        }
+
+        function redirectToHistory() {
+            window.location.href = "{% url 'get_all_requests' %}";
+        }
+    </script>
 </head>
 <body>
     <h1>Тут можно сгенерировать видео бегущей строки</h1>
-    <button >Сгенерировать видео</button>
-    <button ">Посмотреть историю запросов</button>
+    <button onclick="redirectToGenerateVideo()">Сгенерировать видео</button>
+    <button onclick="redirectToHistory()" ">Посмотреть историю запросов</button>
 </body>
 </html>

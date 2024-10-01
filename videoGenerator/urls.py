@@ -21,7 +21,7 @@ from videoapp.views import generate_video, get_all_requests, homePage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homePage , name='generate_video'),
+    path('', homePage , name='home'),
     path('generateVideo/', generate_video, name='generate_video'),
     path('get_all_requests/',get_all_requests , name='get_all_requests'),
 ]

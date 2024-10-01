@@ -83,12 +83,6 @@ def generate_video(request):
 def get_all_requests(request):
     if request.method == 'GET':
         requests = VideoRequest.objects.all()
-        response_data = []
-        for video_request in requests:
-            response_data.append({
-                'message': video_request.message,
-                'created_at': video_request.created_at.isoformat()
-            })
+        return render(request, 'videoapp/history.html', {'requests': requests})
 
-        return JsonResponse(response_data, safe=False)
 
